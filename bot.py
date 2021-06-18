@@ -1,6 +1,7 @@
 import os
 import sys
 import hashlib
+import random
 from typing import Dict
 from twitchio.ext import commands
 from twitchio.dataclasses import User
@@ -173,6 +174,16 @@ async def change_character(ctx):
 	message = " ".join(ctx.content.split(' ')[1:])
 	params = {"username": ctx.author.name, "namecolour": get_name_colour(ctx.author), "message": message}
 	write_command("BADNIK", params)
+
+
+@bot.command(name='spring')
+async def change_character(ctx):
+	print(f"received command {ctx.content}")
+	colours = ['blue', 'yellow', 'red']
+	orientation = ['horizontal', 'vertical', 'diagonal']
+	direction = ['forward', 'back', 'left', 'right']
+	write_command("SPRING", {"colour": random.choice(colours), "orientation": random.choice(orientation),
+		"direction": random.choice(direction)})
 
 
 # Sound commands
