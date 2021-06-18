@@ -175,6 +175,21 @@ async def change_character(ctx):
 	write_command("BADNIK", params)
 
 
+# Sound commands
+@bot.command(name='sfx', aliases=['sound'])
+async def change_character(ctx):
+	print(f"received command {ctx.content}")
+	words = ctx.content.split(' ')
+	if len(words) < 2:
+		print("sfx command did not have an argument, ignoring")
+		return
+	sfx_id = parse_int(words[1])
+	if not sfx_id or sfx_id < 1:
+		print("sfx command did not contain a sfx ID, ignoring")
+		return
+	write_command("SOUND", {"sound": sfx_id})
+
+
 # Message handing
 @bot.event
 async def event_message(ctx):
