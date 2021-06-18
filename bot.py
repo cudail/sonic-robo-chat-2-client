@@ -129,6 +129,13 @@ async def change_character(ctx):
 	write_command("AIR")
 
 
+# Follower commands
+@bot.command(name='swap', aliases=['switch'])
+async def change_character(ctx):
+	print(f"received command {ctx.content}")
+	write_command("SWAP")
+
+
 # Spawning object commands
 @bot.command(name='obj', aliases=['object'])
 async def change_character(ctx):
