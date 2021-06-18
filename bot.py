@@ -190,6 +190,16 @@ async def change_character(ctx):
 	write_command("SOUND", {"sound": sfx_id})
 
 
+@bot.command(name='music', aliases=['bgm', 'play'])
+async def change_character(ctx):
+	print(f"received command {ctx.content}")
+	words = ctx.content.split(' ')
+	if len(words) < 2:
+		print("music command did not have an argument, ignoring")
+		return
+	write_command("MUSIC", {"track": words[1]})
+
+
 # Message handing
 @bot.event
 async def event_message(ctx):
