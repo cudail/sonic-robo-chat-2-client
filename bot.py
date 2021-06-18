@@ -123,6 +123,12 @@ async def change_character(ctx):
 	write_command("1UP")
 
 
+@bot.command(name='air', aliases=['bubble', 'breath'])
+async def change_character(ctx):
+	print(f"received command {ctx.content}")
+	write_command("AIR")
+
+
 # Spawning object commands
 @bot.command(name='obj', aliases=['object'])
 async def change_character(ctx):
