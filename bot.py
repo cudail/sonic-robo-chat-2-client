@@ -76,7 +76,14 @@ def write_command(command_name: str, params: Dict[str, str] = {}):
 @bot.command(name='char')
 async def change_character(ctx):
 	print(f"received command {ctx.content}")
-	write_command("CHARACTER")
+	words = ctx.content.split(' ')
+	params = {}
+	if len(words) > 1:
+		if words[1].lower() == 'random':
+			params['colour'] = 'random'
+		else:
+			params['character'] = words[1].lower()
+	write_command("CHARACTER", params)
 
 
 @bot.event
