@@ -26,6 +26,7 @@ bot = commands.Bot(
 	initial_channels=["#" + os.environ['CHANNEL']]
 )
 
+channel = None
 
 name_colour_list = ["pink", "yellow", "green", "blue", "red", "grey",
 										"orange", "sky", "purple", "aqua", "peridot", "azure", "brown", "rosy"]
@@ -52,7 +53,7 @@ name_colour_dictionary = {
 @bot.event
 async def event_ready():
 	print("Bot started.")
-	global bot
+	global bot, channel
 	channel = bot.get_channel(os.environ['CHANNEL'])
 	if channel:
 		await channel.send("Connected to chat.")
