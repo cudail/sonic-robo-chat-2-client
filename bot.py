@@ -96,6 +96,15 @@ async def change_character(ctx):
 	write_command("CHARACTER", params)
 
 
+@bot.command(name='badnik', aliases=['enemy'])
+async def change_character(ctx):
+	print(f"received command {ctx.content}")
+	words = ctx.content.split(' ')
+	message = " ".join(ctx.content.split(' ')[1:])
+	params = {"username": ctx.author.name, "namecolour": get_name_colour(ctx.author), "message": message}
+	write_command("BADNIK", params)
+
+
 @bot.event
 async def event_message(ctx):
 	await bot.handle_commands(ctx)
