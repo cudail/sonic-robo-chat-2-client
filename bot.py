@@ -83,6 +83,14 @@ def get_name_colour(author: User) -> str:
 	return colour
 
 
+def parse_int(string: str) -> int:
+	try:
+		i = int(string)
+		return i
+	except ValueError:
+		return None
+
+
 @bot.command(name='char', aliases=['character'])
 async def change_character(ctx):
 	print(f"received command {ctx.content}")
@@ -96,10 +104,26 @@ async def change_character(ctx):
 	write_command("CHARACTER", params)
 
 
-@bot.command(name='badnik', aliases=['enemy'])
+@bot.command(name='obj', aliases=['object'])
 async def change_character(ctx):
 	print(f"received command {ctx.content}")
 	words = ctx.content.split(' ')
+	if len(words) < 2:
+		print("Object command did not include an ID, ignoring")
+		return
+	object_id = parse_int(words[1])
+	if not object_id or object_id < 1:
+		print("Object command did not contain a valid ID, ignoring")
+		return
+	message = " ".join(words[2:])
+	colour = get_name_colour(ctx.author)
+	params = {"username": ctx.author.name, "namecolour": colour, "message": message, "objectid": object_id}
+	write_command("BADNIK", params)
+
+
+@bot.command(name='badnik', aliases=['enemy'])
+async def change_character(ctx):
+	print(f"received command {ctx.content}")
 	message = " ".join(ctx.content.split(' ')[1:])
 	params = {"username": ctx.author.name, "namecolour": get_name_colour(ctx.author), "message": message}
 	write_command("BADNIK", params)
