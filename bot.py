@@ -65,6 +65,7 @@ def write_command(command_name: str, params: Dict[str, str] = {}):
 	for param_name in params:
 		command += "|"
 		command += f"{param_name}^{params[param_name]}"
+	print(f"Writing command to file: {command}")
 	file = open(command_file, "a")
 	file.writelines(command + os.linesep)
 	file.close()
