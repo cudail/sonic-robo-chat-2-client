@@ -216,7 +216,7 @@ async def change_character(ctx):
 	if len(words) < 2:
 		print("music command did not have an argument, ignoring")
 		return
-	write_command("MUSIC", {"track": words[1]})
+	write_command("MUSIC", {"track": words[1].upper()})
 
 
 # Message handing
