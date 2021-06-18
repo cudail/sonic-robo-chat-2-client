@@ -136,6 +136,19 @@ async def change_character(ctx):
 	write_command("SWAP")
 
 
+@bot.command(name='foll', aliases=['follower', 'p2'])
+async def change_character(ctx):
+	print(f"received command {ctx.content}")
+	words = ctx.content.split(' ')
+	params = {}
+	if len(words) > 1:
+		if words[1].lower() == 'random':
+			params['colour'] = 'random'
+		else:
+			params['character'] = words[1].lower()
+	write_command("FOLLOWER", params)
+
+
 # Spawning object commands
 @bot.command(name='obj', aliases=['object'])
 async def change_character(ctx):
