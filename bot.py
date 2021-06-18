@@ -86,7 +86,7 @@ async def event_message(ctx):
 	colour = name_colour_dictionary.get(ctx.author.colour)
 	if not colour:
 		name_hash = int(hashlib.md5(ctx.author.name.encode('utf-8')).hexdigest(), 16)
-		colour = name_hash % len(name_colour_list)
+		colour = name_colour_list[name_hash % len(name_colour_list)]
 	write_command("CHAT", {"username": ctx.author.name, "message": ctx.content, "namecolour": colour})
 
 
