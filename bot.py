@@ -91,6 +91,7 @@ def parse_int(string: str) -> int:
 		return None
 
 
+# Character commands
 @bot.command(name='char', aliases=['character'])
 async def change_character(ctx):
 	print(f"received command {ctx.content}")
@@ -104,6 +105,19 @@ async def change_character(ctx):
 	write_command("CHARACTER", params)
 
 
+@bot.command(name='ring')
+async def change_character(ctx):
+	print(f"received command {ctx.content}")
+	write_command("RING")
+
+
+@bot.command(name='unring')
+async def change_character(ctx):
+	print(f"received command {ctx.content}")
+	write_command("UNRING")
+
+
+# Spawning object commands
 @bot.command(name='obj', aliases=['object'])
 async def change_character(ctx):
 	print(f"received command {ctx.content}")
@@ -129,6 +143,7 @@ async def change_character(ctx):
 	write_command("BADNIK", params)
 
 
+# Message handing
 @bot.event
 async def event_message(ctx):
 	await bot.handle_commands(ctx)
