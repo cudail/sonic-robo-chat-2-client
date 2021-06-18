@@ -23,8 +23,9 @@ bot = commands.Bot(
 	client_id=os.environ['CLIENT_ID'],
 	nick=os.environ['BOT_NICK'],
 	prefix=os.environ['BOT_PREFIX'],
-	initial_channels=[os.environ['CHANNEL']]
+	initial_channels=["#" + os.environ['CHANNEL']]
 )
+
 
 name_colour_list = ["pink", "yellow", "green", "blue", "red", "grey",
 										"orange", "sky", "purple", "aqua", "peridot", "azure", "brown", "rosy"]
@@ -51,7 +52,12 @@ name_colour_dictionary = {
 @bot.event
 async def event_ready():
 	print("Bot started.")
-	await bot._ws.send_privmsg(os.environ['CHANNEL'], "Connected to chat.")
+	global bot
+	channel = bot.get_channel(os.environ['CHANNEL'])
+	if channel:
+		await channel.send("Connected to chat.")
+	else:
+		print("Not connected to expected channel: " + os.environ['CHANNEL'])
 
 
 def write_command(command_name: str, params: Dict[str, str] = {}):
