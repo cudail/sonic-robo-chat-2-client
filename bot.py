@@ -176,6 +176,14 @@ async def change_character(ctx):
 	write_command("BADNIK", params)
 
 
+@bot.command(name='monitor', aliases=['tv'])
+async def change_character(ctx):
+	print(f"received command {ctx.content}")
+	message = " ".join(ctx.content.split(' ')[1:])
+	params = {"username": ctx.author.name, "namecolour": get_name_colour(ctx.author), "message": message}
+	write_command("MONITOR", params)
+
+
 @bot.command(name='spring')
 async def change_character(ctx):
 	print(f"received command {ctx.content}")
