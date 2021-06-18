@@ -165,7 +165,7 @@ async def change_character(ctx):
 	message = " ".join(words[2:])
 	colour = get_name_colour(ctx.author)
 	params = {"username": ctx.author.name, "namecolour": colour, "message": message, "objectid": object_id}
-	write_command("BADNIK", params)
+	write_command("OBJECT", params)
 
 
 @bot.command(name='badnik', aliases=['enemy'])
