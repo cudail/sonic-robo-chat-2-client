@@ -72,12 +72,7 @@ async def change_character(ctx):
 
 @bot.event
 async def event_message(ctx):
-	if ctx.author.name.lower() == os.environ['BOT_NICK'].lower():
-		return
-	if ctx.content.startswith(os.environ['BOT_PREFIX']):
-		await bot.handle_commands(ctx)
-		return
-	print(f"user {ctx.author.name} has colour {ctx.author.colour}")
+	await bot.handle_commands(ctx)
 	global name_colour_list, name_colour_dictionary
 	colour = name_colour_dictionary[ctx.author.colour]
 	if not colour:
