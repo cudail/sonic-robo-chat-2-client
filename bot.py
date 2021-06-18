@@ -117,6 +117,12 @@ async def change_character(ctx):
 	write_command("UNRING")
 
 
+@bot.command(name='1up', aliases=['oneup', 'life'])
+async def change_character(ctx):
+	print(f"received command {ctx.content}")
+	write_command("1UP")
+
+
 # Spawning object commands
 @bot.command(name='obj', aliases=['object'])
 async def change_character(ctx):
