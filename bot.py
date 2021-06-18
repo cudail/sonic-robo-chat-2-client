@@ -80,7 +80,7 @@ async def change_character(ctx):
 async def event_message(ctx):
 	await bot.handle_commands(ctx)
 	global name_colour_list, name_colour_dictionary
-	colour = name_colour_dictionary[ctx.author.colour]
+	colour = name_colour_dictionary.get(ctx.author.colour)
 	if not colour:
 		colour = hash(ctx.author.name) % len(name_colour_list)
 	write_command("CHAT", {"username": ctx.author.name, "message": ctx.content, "namecolour": colour})
