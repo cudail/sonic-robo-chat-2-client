@@ -73,7 +73,7 @@ def write_command(command_name: str, params: Dict[str, str] = {}):
 	file.close()
 
 
-@bot.command(name='char')
+@bot.command(name='char', aliases=['character'])
 async def change_character(ctx):
 	print(f"received command {ctx.content}")
 	words = ctx.content.split(' ')
