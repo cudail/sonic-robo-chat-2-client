@@ -1,5 +1,6 @@
 import os
 import sys
+import hashlib
 from typing import Dict
 from twitchio.ext import commands
 from dotenv import load_dotenv
@@ -84,7 +85,8 @@ async def event_message(ctx):
 	global name_colour_list, name_colour_dictionary
 	colour = name_colour_dictionary.get(ctx.author.colour)
 	if not colour:
-		colour = hash(ctx.author.name) % len(name_colour_list)
+		name_hash = int(hashlib.md5(ctx.author.name.encode('utf-8')).hexdigest(), 16)
+		colour = name_hash % len(name_colour_list)
 	write_command("CHAT", {"username": ctx.author.name, "message": ctx.content, "namecolour": colour})
 
 
