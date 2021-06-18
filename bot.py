@@ -3,6 +3,7 @@ import sys
 import hashlib
 from typing import Dict
 from twitchio.ext import commands
+from twitchio.dataclasses import User
 from dotenv import load_dotenv
 
 # Load environment variables
@@ -73,6 +74,15 @@ def write_command(command_name: str, params: Dict[str, str] = {}):
 	file.close()
 
 
+def get_name_colour(author: User) -> str:
+	global name_colour_list, name_colour_dictionary
+	colour = name_colour_dictionary.get(author.colour)
+	if not colour:
+		name_hash = int(hashlib.md5(author.name.encode('utf-8')).hexdigest(), 16)
+		colour = name_colour_list[name_hash % len(name_colour_list)]
+	return colour
+
+
 @bot.command(name='char', aliases=['character'])
 async def change_character(ctx):
 	print(f"received command {ctx.content}")
@@ -89,11 +99,7 @@ async def change_character(ctx):
 @bot.event
 async def event_message(ctx):
 	await bot.handle_commands(ctx)
-	global name_colour_list, name_colour_dictionary
-	colour = name_colour_dictionary.get(ctx.author.colour)
-	if not colour:
-		name_hash = int(hashlib.md5(ctx.author.name.encode('utf-8')).hexdigest(), 16)
-		colour = name_colour_list[name_hash % len(name_colour_list)]
+	colour = get_name_colour(ctx.author)
 	write_command("CHAT", {"username": ctx.author.name, "message": ctx.content, "namecolour": colour})
 
 
