@@ -65,7 +65,7 @@ async def event_ready():
 		print("Not connected to expected channel: " + config['channel'])
 
 
-def write_command(command_name: str, params=None):
+def write_command(command_name: str, params: Dict[str, str] = None):
 	if params is None:
 		params = {}
 	command = command_name
