@@ -2,16 +2,17 @@ import os
 import sys
 import hashlib
 import random
+import yaml
 from typing import Dict
 from twitchio.ext import commands
 from twitchio.dataclasses import User
-from dotenv import load_dotenv
 
-# Load environment variables
-load_dotenv()
+# Load config
+with open('chat-config.yaml') as config_file:
+	config = yaml.load(config_file, Loader=yaml.FullLoader)
 
 # Check for chat command file
-luafiles_dir = os.environ['SRB2_LUAF_DIR']
+luafiles_dir = os.path.join(config['srb2_dir'], 'luafiles')
 if os.path.isdir(luafiles_dir):
 	print(f"Found luafiles directory at {luafiles_dir}")
 else:
@@ -22,11 +23,11 @@ print(f"Using command file {command_file}")
 
 # Initialise bot
 bot = commands.Bot(
-	irc_token=os.environ['TMI_TOKEN'],
-	client_id=os.environ['CLIENT_ID'],
-	nick=os.environ['BOT_NICK'],
-	prefix=os.environ['BOT_PREFIX'],
-	initial_channels=["#" + os.environ['CHANNEL']]
+	irc_token=config['oauth_token'],
+	client_id=config['client_id'],
+	nick=config['bot_nick'],
+	prefix=config['command_prefix'],
+	initial_channels=["#" + config['channel']]
 )
 
 channel = None
@@ -57,11 +58,11 @@ name_colour_dictionary = {
 async def event_ready():
 	print("Bot started.")
 	global bot, channel
-	channel = bot.get_channel(os.environ['CHANNEL'])
+	channel = bot.get_channel(config['channel'])
 	if channel:
 		await channel.send("Connected to chat.")
 	else:
-		print("Not connected to expected channel: " + os.environ['CHANNEL'])
+		print("Not connected to expected channel: " + config['channel'])
 
 
 def write_command(command_name: str, params: Dict[str, str] = {}):
