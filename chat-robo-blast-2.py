@@ -3,7 +3,7 @@ import sys
 import hashlib
 import random
 import yaml
-from typing import Dict
+from typing import Dict, Optional
 from twitchio.ext import commands
 from twitchio.dataclasses import User
 
@@ -85,7 +85,7 @@ def get_name_colour(author: User) -> str:
 	return colour
 
 
-def parse_int(string: str) -> int:
+def parse_int(string: str) -> Optional[int]:
 	try:
 		i = int(string)
 		return i
