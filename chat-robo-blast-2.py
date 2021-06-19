@@ -8,7 +8,7 @@ from twitchio.ext import commands
 from twitchio.dataclasses import User
 
 # Load config
-with open('chat-config.yaml') as config_file:
+with open('config.yaml') as config_file:
 	config = yaml.load(config_file, Loader=yaml.FullLoader)
 
 # Check for chat command file
