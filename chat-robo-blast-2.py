@@ -207,7 +207,7 @@ async def change_character(ctx):
 	if not sfx_id or sfx_id < 1:
 		print("sfx command did not contain a sfx ID, ignoring")
 		return
-	write_command("SOUND", {"sound": sfx_id})
+	write_command("SOUND", {"sound": str(sfx_id)})
 
 
 @bot.command(name='music', aliases=['bgm', 'play'])
