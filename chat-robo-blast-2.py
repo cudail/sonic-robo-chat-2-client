@@ -108,6 +108,14 @@ def parse_int(string: str) -> Optional[int]:
 		return None
 
 
+def parse_float(string: str) -> Optional[float]:
+	try:
+		f = float(string)
+		return f
+	except ValueError:
+		return None
+
+
 # Character commands
 @bot.command(name='char', aliases=['character'])
 async def change_character(ctx):
@@ -144,6 +152,24 @@ async def change_character(ctx):
 async def change_character(ctx):
 	print(f"received command {ctx.content}")
 	write_command("AIR")
+
+
+@bot.command(name='scale', aliases=['size'])
+async def change_character(ctx):
+	print(f"received command {ctx.content}")
+	words = ctx.content.split(' ')
+	if len(words) < 2:
+		print("scale command did not have an argument, ignoring")
+		return
+	scale = parse_float(words[1])
+	if scale is None:
+		print("scale was not a valid number, ignoring")
+		return
+	if scale < 0.1:
+		scale = 0.1
+	if scale > 10:
+		scale = 10
+	write_command("SCALE", {"scale": str(scale), "duration": 35*30})
 
 
 # Follower commands
