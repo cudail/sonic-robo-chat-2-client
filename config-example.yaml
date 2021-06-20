@@ -1,4 +1,4 @@
-oauth_token: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+oauth_token: oauth:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 client_id: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 bot_nick: bot_account_name
 command_prefix: "!"
