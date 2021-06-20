@@ -8,7 +8,20 @@ from twitchio.ext import commands
 from twitchio.dataclasses import User
 
 # Load config
-with open('config.yaml') as config_file:
+if len(sys.argv) > 1:
+	if os.path.exists(sys.argv[1]):
+		config_file_name = sys.argv[1]
+	else:
+		print(f"cannot find specified config file {sys.argv[1]}")
+		sys.exit(2)
+else:
+	if os.path.exists('config.yaml'):
+		config_file_name = 'config.yaml'
+	else:
+		print("No config file specified and the default config file 'config.yaml' was not found")
+		sys.exit(3)
+
+with open(config_file_name) as config_file:
 	config = yaml.load(config_file, Loader=yaml.FullLoader)
 
 # Check for chat command file
