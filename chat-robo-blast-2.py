@@ -1,3 +1,4 @@
+import inspect
 import os
 import sys
 import hashlib
@@ -74,6 +75,10 @@ async def event_ready():
 	channel = bot.get_channel(config['channel'])
 	if channel:
 		await channel.send("Connected to chat.")
+		await channel.send("!char tails")
+		await channel.send("!char abc")
+		await channel.send("!char")
+		await channel.send("!char random")
 	else:
 		print("Not connected to expected channel: " + config['channel'])
 
@@ -137,8 +142,8 @@ def handle_command(name: str, context: Context) -> str:
 
 
 # Character commands
-@bot.command(name='char')
-async def change_character(ctx):
+@bot.command()
+async def char(ctx):
 	error = handle_command('char', ctx)
 	if error is not None:
 		print(error)
@@ -153,32 +158,32 @@ async def change_character(ctx):
 	write_command("CHARACTER", params)
 
 
-@bot.command(name='ring')
-async def change_character(ctx):
+@bot.command()
+async def ring(ctx):
 	print(f"received command {ctx.content}")
 	write_command("RING")
 
 
-@bot.command(name='unring')
-async def change_character(ctx):
+@bot.command()
+async def unring(ctx):
 	print(f"received command {ctx.content}")
 	write_command("UNRING")
 
 
 @bot.command(name='1up')
-async def change_character(ctx):
+async def oneup(ctx):
 	print(f"received command {ctx.content}")
 	write_command("1UP")
 
 
-@bot.command(name='air')
-async def change_character(ctx):
+@bot.command()
+async def air(ctx):
 	print(f"received command {ctx.content}")
 	write_command("AIR")
 
 
-@bot.command(name='scale')
-async def change_character(ctx):
+@bot.command()
+async def scale(ctx):
 	print(f"received command {ctx.content}")
 	words = ctx.content.split(' ')
 	if len(words) < 2:
@@ -196,14 +201,14 @@ async def change_character(ctx):
 
 
 # Follower commands
-@bot.command(name='swap')
-async def change_character(ctx):
+@bot.command()
+async def swap(ctx):
 	print(f"received command {ctx.content}")
 	write_command("SWAP")
 
 
-@bot.command(name='foll')
-async def change_character(ctx):
+@bot.command()
+async def foll(ctx):
 	print(f"received command {ctx.content}")
 	words = ctx.content.split(' ')
 	params = {}
@@ -216,8 +221,8 @@ async def change_character(ctx):
 
 
 # Spawning object commands
-@bot.command(name='obj')
-async def change_character(ctx):
+@bot.command()
+async def obj(ctx):
 	print(f"received command {ctx.content}")
 	words = ctx.content.split(' ')
 	if len(words) < 2:
@@ -233,24 +238,24 @@ async def change_character(ctx):
 	write_command("OBJECT", params)
 
 
-@bot.command(name='badnik')
-async def change_character(ctx):
+@bot.command()
+async def badnik(ctx):
 	print(f"received command {ctx.content}")
 	message = " ".join(ctx.content.split(' ')[1:])
 	params = {"username": ctx.author.name, "namecolour": get_name_colour(ctx.author), "message": message}
 	write_command("BADNIK", params)
 
 
-@bot.command(name='monitor')
-async def change_character(ctx):
+@bot.command()
+async def monitor(ctx):
 	print(f"received command {ctx.content}")
 	message = " ".join(ctx.content.split(' ')[1:])
 	params = {"username": ctx.author.name, "namecolour": get_name_colour(ctx.author), "message": message}
 	write_command("MONITOR", params)
 
 
-@bot.command(name='spring')
-async def change_character(ctx):
+@bot.command()
+async def spring(ctx):
 	print(f"received command {ctx.content}")
 	colours = ['blue', 'yellow', 'red']
 	orientation = ['horizontal', 'vertical', 'diagonal']
@@ -260,8 +265,8 @@ async def change_character(ctx):
 
 
 # Sound commands
-@bot.command(name='sfx')
-async def change_character(ctx):
+@bot.command()
+async def sfx(ctx):
 	print(f"received command {ctx.content}")
 	words = ctx.content.split(' ')
 	if len(words) < 2:
@@ -274,8 +279,8 @@ async def change_character(ctx):
 	write_command("SOUND", {"sound": str(sfx_id)})
 
 
-@bot.command(name='bgm')
-async def change_character(ctx):
+@bot.command()
+async def bgm(ctx):
 	print(f"received command {ctx.content}")
 	words = ctx.content.split(' ')
 	if len(words) < 2:
