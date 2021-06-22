@@ -1,4 +1,3 @@
-import inspect
 import os
 import sys
 import hashlib
@@ -132,7 +131,7 @@ def handle_command(name: str, context: Context) -> str:
 	if name in config['command_rules']['bits']:
 		bits_needed = parse_int(config['command_rules']['bits'][name])
 		if bits_needed is not None and bits_needed > 0:
-			if not context.message.tags or not 'bits_used' in context.message.tags:
+			if not context.message.tags or 'bits_used' not in context.message.tags:
 				return f"Command {name} needs {bits_needed} bits but message had none."
 			bits_received = parse_int(context.message.tags['bits_used'])
 			if bits_received is None:
@@ -189,15 +188,15 @@ async def scale(ctx):
 	if len(words) < 2:
 		print("scale command did not have an argument, ignoring")
 		return
-	scale = parse_float(words[1])
-	if scale is None:
+	char_scale = parse_float(words[1])
+	if char_scale is None:
 		print("scale was not a valid number, ignoring")
 		return
-	if scale < 0.1:
-		scale = 0.1
-	if scale > 10:
-		scale = 10
-	write_command("SCALE", {"scale": str(scale), "duration": 35*30})
+	if char_scale < 0.1:
+		char_scale = 0.1
+	if char_scale > 10:
+		char_scale = 10
+	write_command("SCALE", {"scale": str(char_scale), "duration": 35*30})
 
 
 # Follower commands
