@@ -117,7 +117,7 @@ def parse_float(string: str) -> Optional[float]:
 
 
 # Character commands
-@bot.command(name='char', aliases=['character'])
+@bot.command(name='char')
 async def change_character(ctx):
 	print(f"received command {ctx.content}")
 	words = ctx.content.split(' ')
@@ -142,19 +142,19 @@ async def change_character(ctx):
 	write_command("UNRING")
 
 
-@bot.command(name='1up', aliases=['oneup', 'life'])
+@bot.command(name='1up')
 async def change_character(ctx):
 	print(f"received command {ctx.content}")
 	write_command("1UP")
 
 
-@bot.command(name='air', aliases=['bubble', 'breath'])
+@bot.command(name='air')
 async def change_character(ctx):
 	print(f"received command {ctx.content}")
 	write_command("AIR")
 
 
-@bot.command(name='scale', aliases=['size'])
+@bot.command(name='scale')
 async def change_character(ctx):
 	print(f"received command {ctx.content}")
 	words = ctx.content.split(' ')
@@ -173,13 +173,13 @@ async def change_character(ctx):
 
 
 # Follower commands
-@bot.command(name='swap', aliases=['switch'])
+@bot.command(name='swap')
 async def change_character(ctx):
 	print(f"received command {ctx.content}")
 	write_command("SWAP")
 
 
-@bot.command(name='foll', aliases=['follower', 'p2'])
+@bot.command(name='foll')
 async def change_character(ctx):
 	print(f"received command {ctx.content}")
 	words = ctx.content.split(' ')
@@ -193,7 +193,7 @@ async def change_character(ctx):
 
 
 # Spawning object commands
-@bot.command(name='obj', aliases=['object'])
+@bot.command(name='obj')
 async def change_character(ctx):
 	print(f"received command {ctx.content}")
 	words = ctx.content.split(' ')
@@ -210,7 +210,7 @@ async def change_character(ctx):
 	write_command("OBJECT", params)
 
 
-@bot.command(name='badnik', aliases=['enemy'])
+@bot.command(name='badnik')
 async def change_character(ctx):
 	print(f"received command {ctx.content}")
 	message = " ".join(ctx.content.split(' ')[1:])
@@ -218,7 +218,7 @@ async def change_character(ctx):
 	write_command("BADNIK", params)
 
 
-@bot.command(name='monitor', aliases=['tv'])
+@bot.command(name='monitor')
 async def change_character(ctx):
 	print(f"received command {ctx.content}")
 	message = " ".join(ctx.content.split(' ')[1:])
@@ -237,7 +237,7 @@ async def change_character(ctx):
 
 
 # Sound commands
-@bot.command(name='sfx', aliases=['sound'])
+@bot.command(name='sfx')
 async def change_character(ctx):
 	print(f"received command {ctx.content}")
 	words = ctx.content.split(' ')
@@ -251,7 +251,7 @@ async def change_character(ctx):
 	write_command("SOUND", {"sound": str(sfx_id)})
 
 
-@bot.command(name='music', aliases=['bgm', 'play'])
+@bot.command(name='bgm')
 async def change_character(ctx):
 	print(f"received command {ctx.content}")
 	words = ctx.content.split(' ')
