@@ -74,10 +74,6 @@ async def event_ready():
 	channel = bot.get_channel(config['channel'])
 	if channel:
 		await channel.send("Connected to chat.")
-		await channel.send("!char tails")
-		await channel.send("!char abc")
-		await channel.send("!char")
-		await channel.send("!char random")
 	else:
 		print("Not connected to expected channel: " + config['channel'])
 
