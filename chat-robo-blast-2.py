@@ -142,7 +142,7 @@ def handle_command(name: str, context: Context) -> str:
 
 # Character commands
 @bot.command()
-async def char(ctx):
+async def char(ctx: Context):
 	error = handle_command('char', ctx)
 	if error is not None:
 		print(error)
@@ -158,7 +158,7 @@ async def char(ctx):
 
 
 @bot.command()
-async def ring(ctx):
+async def ring(ctx: Context):
 	error = handle_command('ring', ctx)
 	if error is not None:
 		print(error)
@@ -167,7 +167,7 @@ async def ring(ctx):
 
 
 @bot.command()
-async def unring(ctx):
+async def unring(ctx: Context):
 	error = handle_command('unring', ctx)
 	if error is not None:
 		print(error)
@@ -176,7 +176,7 @@ async def unring(ctx):
 
 
 @bot.command(name='1up')
-async def oneup(ctx):
+async def oneup(ctx: Context):
 	error = handle_command('1up', ctx)
 	if error is not None:
 		print(error)
@@ -185,7 +185,7 @@ async def oneup(ctx):
 
 
 @bot.command()
-async def air(ctx):
+async def air(ctx: Context):
 	error = handle_command('air', ctx)
 	if error is not None:
 		print(error)
@@ -194,7 +194,7 @@ async def air(ctx):
 
 
 @bot.command()
-async def scale(ctx):
+async def scale(ctx: Context):
 	error = handle_command('scale', ctx)
 	if error is not None:
 		print(error)
@@ -216,7 +216,7 @@ async def scale(ctx):
 
 # Follower commands
 @bot.command()
-async def swap(ctx):
+async def swap(ctx: Context):
 	error = handle_command('swap', ctx)
 	if error is not None:
 		print(error)
@@ -225,7 +225,7 @@ async def swap(ctx):
 
 
 @bot.command()
-async def foll(ctx):
+async def foll(ctx: Context):
 	error = handle_command('foll', ctx)
 	if error is not None:
 		print(error)
@@ -242,7 +242,7 @@ async def foll(ctx):
 
 # Spawning object commands
 @bot.command()
-async def obj(ctx):
+async def obj(ctx: Context):
 	error = handle_command('obj', ctx)
 	if error is not None:
 		print(error)
@@ -262,7 +262,7 @@ async def obj(ctx):
 
 
 @bot.command()
-async def badnik(ctx):
+async def badnik(ctx: Context):
 	error = handle_command('badnik', ctx)
 	if error is not None:
 		print(error)
@@ -273,7 +273,7 @@ async def badnik(ctx):
 
 
 @bot.command()
-async def monitor(ctx):
+async def monitor(ctx: Context):
 	error = handle_command('monitor', ctx)
 	if error is not None:
 		print(error)
@@ -284,7 +284,7 @@ async def monitor(ctx):
 
 
 @bot.command()
-async def spring(ctx):
+async def spring(ctx: Context):
 	error = handle_command('spring', ctx)
 	if error is not None:
 		print(error)
@@ -298,7 +298,7 @@ async def spring(ctx):
 
 # Sound commands
 @bot.command()
-async def sfx(ctx):
+async def sfx(ctx: Context):
 	error = handle_command('sfx', ctx)
 	if error is not None:
 		print(error)
@@ -315,7 +315,7 @@ async def sfx(ctx):
 
 
 @bot.command()
-async def bgm(ctx):
+async def bgm(ctx: Context):
 	error = handle_command('bgm', ctx)
 	if error is not None:
 		print(error)
@@ -329,7 +329,7 @@ async def bgm(ctx):
 
 # Message handing
 @bot.event
-async def event_message(ctx):
+async def event_message(ctx: Context):
 	await bot.handle_commands(ctx)
 	colour = get_name_colour(ctx.author)
 	write_command("CHAT", {"username": ctx.author.name, "message": ctx.content, "namecolour": colour})
