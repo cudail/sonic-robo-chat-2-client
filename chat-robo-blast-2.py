@@ -345,6 +345,12 @@ async def bgm(ctx: Context):
 async def event_message(ctx: Context):
 	await bot.handle_commands(ctx)
 	colour = get_name_colour(ctx.author)
+	if not config['display_chat_messages']:
+		return
+	if ctx.content.startswith(config['command_prefix']) and not config['display_chat_commands']:
+		return
+	if ctx.author.name == bot.nick and not config['display_bot_messages']:
+		return
 	write_command("CHAT", {"username": ctx.author.name, "message": ctx.content, "namecolour": colour})
 
 
