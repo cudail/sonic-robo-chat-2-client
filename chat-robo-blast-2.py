@@ -5,7 +5,7 @@ import random
 import yaml
 from typing import Dict, Optional
 from twitchio.ext import commands
-from twitchio.dataclasses import User
+from twitchio.dataclasses import User, Context
 
 # Load config
 if len(sys.argv) > 1:
@@ -116,10 +116,33 @@ def parse_float(string: str) -> Optional[float]:
 		return None
 
 
+def handle_command(name: str, context: Context) -> str:
+	print(f"received command {context.content}")
+	if name in config['command_rules']['disabled']:
+		return f"Command {name} is disabled, ignoring."
+	if name in config['command_rules']['subscriber_only'] and not context.author.is_subscriber:
+		return f"Command {name} is subscriber only, ignoring"
+	if name in config['command_rules']['mod_only'] and not context.author.is_mod:
+		return f"Command {name} is mod only, ignoring."
+	if name in config['command_rules']['bits']:
+		bits_needed = parse_int(config['command_rules']['bits'][name])
+		if bits_needed is not None and bits_needed > 0:
+			if not context.message.tags or not 'bits_used' in context.message.tags:
+				return f"Command {name} needs {bits_needed} bits but message had none."
+			bits_received = parse_int(context.message.tags['bits_used'])
+			if bits_received is None:
+				return f"Command {name} needs {bits_needed} bits but message had none."
+			if bits_received < bits_needed:
+				return f"Command {name} needs {bits_needed} but only {bits_received} were received."
+
+
 # Character commands
 @bot.command(name='char')
 async def change_character(ctx):
-	print(f"received command {ctx.content}")
+	error = handle_command('char', ctx)
+	if error is not None:
+		print(error)
+		return
 	words = ctx.content.split(' ')
 	params = {}
 	if len(words) > 1:
