@@ -1,3 +1,4 @@
+import math
 import os
 import sys
 import hashlib
@@ -159,6 +160,14 @@ async def ring(ctx: Context):
 	if error is not None:
 		print(error)
 		return
+	bpr = parse_int(config.get('command_rules', {}).get('bits_per_ring'))
+	if bpr and bpr > 0:
+		bits_received = parse_int(ctx.message.tags['bits_used'])
+		if bits_received is not None:
+			m = math.floor(bits_received / bpr)
+			for i in range(1, m):
+				write_command("RING")
+			return
 	write_command("RING")
 
 
@@ -168,6 +177,14 @@ async def unring(ctx: Context):
 	if error is not None:
 		print(error)
 		return
+	bpu = parse_int(config.get('command_rules', {}).get('bits_per_unring'))
+	if bpu and bpu > 0:
+		bits_received = parse_int(ctx.message.tags['bits_used'])
+		if bits_received is not None:
+			m = math.floor(bits_received / bpu)
+			for i in range(1, m):
+				write_command("UNRING")
+			return
 	write_command("UNRING")
 
 
