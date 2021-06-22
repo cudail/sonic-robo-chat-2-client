@@ -159,31 +159,46 @@ async def char(ctx):
 
 @bot.command()
 async def ring(ctx):
-	print(f"received command {ctx.content}")
+	error = handle_command('ring', ctx)
+	if error is not None:
+		print(error)
+		return
 	write_command("RING")
 
 
 @bot.command()
 async def unring(ctx):
-	print(f"received command {ctx.content}")
+	error = handle_command('unring', ctx)
+	if error is not None:
+		print(error)
+		return
 	write_command("UNRING")
 
 
 @bot.command(name='1up')
 async def oneup(ctx):
-	print(f"received command {ctx.content}")
+	error = handle_command('1up', ctx)
+	if error is not None:
+		print(error)
+		return
 	write_command("1UP")
 
 
 @bot.command()
 async def air(ctx):
-	print(f"received command {ctx.content}")
+	error = handle_command('air', ctx)
+	if error is not None:
+		print(error)
+		return
 	write_command("AIR")
 
 
 @bot.command()
 async def scale(ctx):
-	print(f"received command {ctx.content}")
+	error = handle_command('scale', ctx)
+	if error is not None:
+		print(error)
+		return
 	words = ctx.content.split(' ')
 	if len(words) < 2:
 		print("scale command did not have an argument, ignoring")
@@ -202,13 +217,19 @@ async def scale(ctx):
 # Follower commands
 @bot.command()
 async def swap(ctx):
-	print(f"received command {ctx.content}")
+	error = handle_command('swap', ctx)
+	if error is not None:
+		print(error)
+		return
 	write_command("SWAP")
 
 
 @bot.command()
 async def foll(ctx):
-	print(f"received command {ctx.content}")
+	error = handle_command('foll', ctx)
+	if error is not None:
+		print(error)
+		return
 	words = ctx.content.split(' ')
 	params = {}
 	if len(words) > 1:
@@ -222,7 +243,10 @@ async def foll(ctx):
 # Spawning object commands
 @bot.command()
 async def obj(ctx):
-	print(f"received command {ctx.content}")
+	error = handle_command('obj', ctx)
+	if error is not None:
+		print(error)
+		return
 	words = ctx.content.split(' ')
 	if len(words) < 2:
 		print("Object command did not include an ID, ignoring")
@@ -239,7 +263,10 @@ async def obj(ctx):
 
 @bot.command()
 async def badnik(ctx):
-	print(f"received command {ctx.content}")
+	error = handle_command('badnik', ctx)
+	if error is not None:
+		print(error)
+		return
 	message = " ".join(ctx.content.split(' ')[1:])
 	params = {"username": ctx.author.name, "namecolour": get_name_colour(ctx.author), "message": message}
 	write_command("BADNIK", params)
@@ -247,7 +274,10 @@ async def badnik(ctx):
 
 @bot.command()
 async def monitor(ctx):
-	print(f"received command {ctx.content}")
+	error = handle_command('monitor', ctx)
+	if error is not None:
+		print(error)
+		return
 	message = " ".join(ctx.content.split(' ')[1:])
 	params = {"username": ctx.author.name, "namecolour": get_name_colour(ctx.author), "message": message}
 	write_command("MONITOR", params)
@@ -255,7 +285,10 @@ async def monitor(ctx):
 
 @bot.command()
 async def spring(ctx):
-	print(f"received command {ctx.content}")
+	error = handle_command('spring', ctx)
+	if error is not None:
+		print(error)
+		return
 	colours = ['blue', 'yellow', 'red']
 	orientation = ['horizontal', 'vertical', 'diagonal']
 	direction = ['forward', 'back', 'left', 'right']
@@ -266,7 +299,10 @@ async def spring(ctx):
 # Sound commands
 @bot.command()
 async def sfx(ctx):
-	print(f"received command {ctx.content}")
+	error = handle_command('sfx', ctx)
+	if error is not None:
+		print(error)
+		return
 	words = ctx.content.split(' ')
 	if len(words) < 2:
 		print("sfx command did not have an argument, ignoring")
@@ -280,7 +316,10 @@ async def sfx(ctx):
 
 @bot.command()
 async def bgm(ctx):
-	print(f"received command {ctx.content}")
+	error = handle_command('bgm', ctx)
+	if error is not None:
+		print(error)
+		return
 	words = ctx.content.split(' ')
 	if len(words) < 2:
 		print("music command did not have an argument, ignoring")
