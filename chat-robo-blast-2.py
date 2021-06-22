@@ -72,8 +72,8 @@ async def event_ready():
 	print("Bot started.")
 	global bot, channel
 	channel = bot.get_channel(config['channel'])
-	if channel:
-		await channel.send("Connected to chat.")
+	if channel and config.get('join_message'):
+		await channel.send(config['join_message'])
 	else:
 		print("Not connected to expected channel: " + config['channel'])
 
