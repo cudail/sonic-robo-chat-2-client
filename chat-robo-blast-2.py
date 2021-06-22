@@ -46,7 +46,7 @@ bot = commands.Bot(
 channel = None
 
 name_colour_list = ["pink", "yellow", "green", "blue", "red", "grey",
-										"orange", "sky", "purple", "aqua", "peridot", "azure", "brown", "rosy"]
+	"orange", "sky", "purple", "aqua", "peridot", "azure", "brown", "rosy"]
 
 name_colour_dictionary = {
 	"#FF0000": "red",
