@@ -151,10 +151,12 @@ async def char(ctx: Context):
 	words = ctx.content.split(' ')
 	params = {}
 	if len(words) > 1:
-		if words[1].lower() == 'random':
+		if words[1].lower() == 'rcolour':
 			params['colour'] = 'random'
 		else:
 			params['character'] = words[1].lower()
+			if len(words) > 2 and words[2].lower() == 'rcolour':
+				params['colour'] = 'random'
 	write_command("CHARACTER", params)
 
 
@@ -250,10 +252,12 @@ async def foll(ctx: Context):
 	words = ctx.content.split(' ')
 	params = {}
 	if len(words) > 1:
-		if words[1].lower() == 'random':
+		if words[1].lower() == 'rcolour':
 			params['colour'] = 'random'
 		else:
 			params['character'] = words[1].lower()
+			if len(words) > 2 and words[2].lower() == 'rcolour':
+				params['colour'] = 'random'
 	write_command("FOLLOWER", params)
 
 
