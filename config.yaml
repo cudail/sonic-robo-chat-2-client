@@ -1,19 +1,29 @@
+# Config file for the Sonic Robo Chat 2 client. This file uses YAML syntax.
+# Lines starting with # are comments. Other lines are configuration.
+# oauth_token, client_id, bot_nick, channel and srb2_dir should be updated to
+# match your setup. Other settings control how commands are interpreted. See the
+# readme for details on what the different options do. I recommend keeping  the
+# killall, despawn and config lists in the mod_only list. Otherwise feel free to
+# uncomment and change these settings as you wish.
+
 oauth_token: oauth:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 client_id: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 bot_nick: bot_account_name
-command_prefix: "!"
 channel: twitch_channel_name
 srb2_dir: "C:\Users\%USERNAME%\SRB2 v2.2"
-command_rules:
-  subscriber_only:
-    - char
-    - foll
-  mod_only:
-    - killall
-    - despawnall
-    - config
-  bits:
-    obj: 1
-    bgm: 10
-  bits_per_ring: 1
-  bits_per_unring: 2
+command_prefix: "!"
+mod_only:
+  - killall
+  - despawn
+  - config
+display_chat_messages: yes
+display_chat_commands: yes
+display_bot_messages: yes
+#subscriber_only:
+#  - char
+#  - foll
+#min_bits:
+#  obj: 1
+#  bgm: 10
+#bits_per_ring: 1
+#bits_per_unring: 2
