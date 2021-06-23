@@ -123,14 +123,14 @@ def parse_float(string: str) -> Optional[float]:
 
 def handle_command(name: str, context: Context) -> str:
 	print(f"received command {context.content}")
-	if name in config['command_rules']['disabled']:
+	if name in config['disabled']:
 		return f"Command {name} is disabled, ignoring."
-	if name in config['command_rules']['subscriber_only'] and not context.author.is_subscriber:
+	if name in config['subscriber_only'] and not context.author.is_subscriber:
 		return f"Command {name} is subscriber only, ignoring"
-	if name in config['command_rules']['mod_only'] and not context.author.is_mod:
+	if name in config['mod_only'] and not context.author.is_mod:
 		return f"Command {name} is mod only, ignoring."
-	if name in config['command_rules']['bits']:
-		bits_needed = parse_int(config['command_rules']['bits'][name])
+	if name in config['bits']:
+		bits_needed = parse_int(config['bits'][name])
 		if bits_needed is not None and bits_needed > 0:
 			if not context.message.tags or 'bits_used' not in context.message.tags:
 				return f"Command {name} needs {bits_needed} bits but message had none."
@@ -164,7 +164,7 @@ async def ring(ctx: Context):
 	if error is not None:
 		print(error)
 		return
-	bpr = parse_int(config.get('command_rules', {}).get('bits_per_ring'))
+	bpr = parse_int(config.get('bits_per_ring'))
 	if bpr and bpr > 0:
 		bits_received = parse_int(ctx.message.tags['bits_used'])
 		if bits_received is not None:
@@ -181,7 +181,7 @@ async def unring(ctx: Context):
 	if error is not None:
 		print(error)
 		return
-	bpu = parse_int(config.get('command_rules', {}).get('bits_per_unring'))
+	bpu = parse_int(config.get('bits_per_unring'))
 	if bpu and bpu > 0:
 		bits_received = parse_int(ctx.message.tags['bits_used'])
 		if bits_received is not None:
