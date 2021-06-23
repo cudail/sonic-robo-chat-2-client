@@ -35,9 +35,13 @@ else:
 command_file = os.path.join(luafiles_dir, "chat_commands.txt")
 print(f"Using command file {command_file}")
 
+oauth_token = config['oauth_token']
+if not oauth_token.startswith("oauth:"):
+	oauth_token = "oauth:" + oauth_token
+
 # Initialise bot
 bot = commands.Bot(
-	irc_token=config['oauth_token'],
+	irc_token=oauth_token,
 	client_id=config['client_id'],
 	nick=config['bot_nick'],
 	prefix=config['command_prefix'],
