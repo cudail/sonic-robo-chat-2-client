@@ -362,6 +362,24 @@ async def config_command(ctx: Context):
 	write_command("CONFIG", {"setting": words[1], "value": words[2]})
 
 
+@bot.command()
+async def killall(ctx: Context):
+	error = handle_command('killall', ctx)
+	if error is not None:
+		print(error)
+		return
+	write_command("KILLALL")
+
+
+@bot.command()
+async def despawn(ctx: Context):
+	error = handle_command('despawn', ctx)
+	if error is not None:
+		print(error)
+		return
+	write_command("DESPAWN")
+
+
 # Message handing
 @bot.event
 async def event_message(ctx: Context):
