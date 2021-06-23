@@ -344,6 +344,20 @@ async def bgm(ctx: Context):
 	write_command("MUSIC", {"track": words[1].upper()})
 
 
+# Config commands
+@bot.command(name='config')
+async def config_command(ctx: Context):
+	error = handle_command('config', ctx)
+	if error is not None:
+		print(error)
+		return
+	words = ctx.content.split(' ')
+	if len(words) < 3:
+		print("config command did not have enough arguments, ignoring.")
+		return
+	write_command("CONFIG", {"setting": words[1], "value": words[2]})
+
+
 # Message handing
 @bot.event
 async def event_message(ctx: Context):
