@@ -129,8 +129,8 @@ def handle_command(name: str, context: Context) -> str:
 		return f"Command {name} is subscriber only, ignoring"
 	if name in config['mod_only'] and not context.author.is_mod:
 		return f"Command {name} is mod only, ignoring."
-	if name in config['bits']:
-		bits_needed = parse_int(config['bits'][name])
+	if name in config['min_bits']:
+		bits_needed = parse_int(config['min_bits'][name])
 		if bits_needed is not None and bits_needed > 0:
 			if not context.message.tags or 'bits_used' not in context.message.tags:
 				return f"Command {name} needs {bits_needed} bits but message had none."
