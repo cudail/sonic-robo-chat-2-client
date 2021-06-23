@@ -383,6 +383,8 @@ async def despawn(ctx: Context):
 # Message handing
 @bot.event
 async def event_message(ctx: Context):
+	for character in "|^\r\n":  # Strip dangerous characters
+		ctx.content = ctx.content.replace(character, ' ')
 	await bot.handle_commands(ctx)
 	colour = get_name_colour(ctx.author)
 	if not config['display_chat_messages']:
