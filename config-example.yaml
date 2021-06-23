@@ -1,6 +1,0 @@
-oauth_token: oauth:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-client_id: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-bot_nick: bot_account_name
-command_prefix: "!"
-channel: twitch_channel_name
-srb2_dir: "C:\Program Files (x86)\Sonic Robo Blast 2"

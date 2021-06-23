@@ -1,0 +1,19 @@
+oauth_token: oauth:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+client_id: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+bot_nick: bot_account_name
+command_prefix: "!"
+channel: twitch_channel_name
+srb2_dir: "C:\Users\%USERNAME%\SRB2 v2.2"
+command_rules:
+  subscriber_only:
+    - char
+    - foll
+  mod_only:
+    - killall
+    - despawnall
+    - config
+  bits:
+    obj: 1
+    bgm: 10
+  bits_per_ring: 1
+  bits_per_unring: 2
