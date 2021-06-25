@@ -105,6 +105,8 @@ The configuration file specifies the following options using YAML:
   without a cheer to give one ring unless the `ring` command in also specified
   in the `min_bits` dictionary.
 * `bits_per_unring`: The same as the above, but for the `unring` command.
+* `write_immediately`: Write commands immediately as they come in rather than
+  queuing them.
 
 ## Commands
 
