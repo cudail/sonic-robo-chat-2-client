@@ -93,16 +93,23 @@ def write_command(command_name: str, params: Dict[str, str] = None):
 	for param_name in params:
 		command += "|"
 		command += f"{param_name}^{params[param_name]}"
-	print(f"Adding command to queue: {command}")
-	# add commands queue and wait until the mod as cleared the existing file
-	# before writing to it
-	global queue
-	queue.append(command)
-	if not os.path.exists(command_file) or os.stat(command_file).st_size == 0:
+	if config.get('write_immediately'):
+		print(f"Writing command to file: {command}")
 		file = open(command_file, "a")
-		file.writelines(os.linesep.join(queue))
+		file.writelines(command + os.linesep)
 		file.close()
-		queue = []
+	else:
+		# add commands queue and wait until the mod as cleared the existing file
+		# before writing to it
+		print(f"Adding command to queue: {command}")
+		global queue
+		queue.append(command)
+		if not os.path.exists(command_file) or os.stat(command_file).st_size == 0:
+			print("Writing commands to file.")
+			file = open(command_file, "a")
+			file.writelines(os.linesep.join(queue))
+			file.close()
+			queue = []
 
 
 def get_name_colour(author: User) -> str:
