@@ -39,12 +39,14 @@ oauth_token = config['oauth_token']
 if not oauth_token.startswith("oauth:"):
 	oauth_token = "oauth:" + oauth_token
 
+command_prefix = config.get('command_prefix', "!")
+
 # Initialise bot
 bot = commands.Bot(
 	irc_token=oauth_token,
 	client_id=config['client_id'],
 	nick=config['bot_nick'],
-	prefix=config['command_prefix'],
+	prefix=command_prefix,
 	initial_channels=["#" + config['channel']]
 )
 
@@ -416,7 +418,8 @@ async def event_message(ctx: Context):
 	colour = get_name_colour(ctx.author)
 	if not config.get('display_chat_messages'):
 		return
-	if ctx.content.startswith(config['command_prefix']) and not config[
+	global command_prefix
+	if ctx.content.startswith(command_prefix) and not config[
 		'display_chat_commands']:
 		return
 	if ctx.author.name == bot.nick and not config['display_bot_messages']:
