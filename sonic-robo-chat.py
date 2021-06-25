@@ -72,6 +72,9 @@ name_colour_dictionary = {
 }
 
 
+queue = []
+
+
 @bot.event
 async def event_ready():
 	print("Bot started.")
@@ -90,10 +93,16 @@ def write_command(command_name: str, params: Dict[str, str] = None):
 	for param_name in params:
 		command += "|"
 		command += f"{param_name}^{params[param_name]}"
-	print(f"Writing command to file: {command}")
-	file = open(command_file, "a")
-	file.writelines(command + os.linesep)
-	file.close()
+	print(f"Adding command to queue: {command}")
+	# add commands queue and wait until the mod as cleared the existing file
+	# before writing to it
+	global queue
+	queue.append(command)
+	if not os.path.exists(command_file) or os.stat(command_file).st_size == 0:
+		file = open(command_file, "a")
+		file.writelines(os.linesep.join(queue))
+		file.close()
+		queue = []
 
 
 def get_name_colour(author: User) -> str:
