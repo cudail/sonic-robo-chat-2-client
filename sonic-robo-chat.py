@@ -48,6 +48,13 @@ bot = commands.Bot(
 	initial_channels=["#" + config['channel']]
 )
 
+
+subscriber_only = config.get('subscriber_only', [])
+mod_only = config.get('mod_only', [])
+disabled = config.get('disabled', [])
+min_bits = config.get('min_bits', {})
+
+
 channel = None
 
 name_colour_list = ["pink", "yellow", "green", "blue", "red", "grey",
@@ -70,7 +77,6 @@ name_colour_dictionary = {
 	"#8A2BE2": "purple",
 	"#00FF7F": "green"
 }
-
 
 queue = []
 
@@ -139,14 +145,15 @@ def parse_float(string: str) -> Optional[float]:
 
 def handle_command(name: str, context: Context) -> str:
 	print(f"received command {context.content}")
-	if name in config['disabled']:
+	global disabled, subscriber_only, mod_only, min_bits
+	if name in disabled:
 		return f"Command {name} is disabled, ignoring."
-	if name in config['subscriber_only'] and not context.author.is_subscriber:
+	if name in subscriber_only and not context.author.is_subscriber:
 		return f"Command {name} is subscriber only, ignoring"
-	if name in config['mod_only'] and not context.author.is_mod:
+	if name in mod_only and not context.author.is_mod:
 		return f"Command {name} is mod only, ignoring."
-	if name in config['min_bits']:
-		bits_needed = parse_int(config['min_bits'][name])
+	if name in min_bits:
+		bits_needed = parse_int(min_bits[name])
 		if bits_needed is not None and bits_needed > 0:
 			if not context.message.tags or 'bits_used' not in context.message.tags:
 				return f"Command {name} needs {bits_needed} bits but message had none."
@@ -246,7 +253,7 @@ async def scale(ctx: Context):
 		char_scale = 0.1
 	if char_scale > 10:
 		char_scale = 10
-	write_command("SCALE", {"scale": str(char_scale), "duration": 35*30})
+	write_command("SCALE", {"scale": str(char_scale), "duration": 35 * 30})
 
 
 # Follower commands
@@ -294,7 +301,8 @@ async def obj(ctx: Context):
 		return
 	message = " ".join(words[2:])
 	colour = get_name_colour(ctx.author)
-	params = {"username": ctx.author.name, "namecolour": colour, "message": message, "objectid": object_id}
+	params = {"username": ctx.author.name, "namecolour": colour,
+		"message": message, "objectid": object_id}
 	write_command("OBJECT", params)
 
 
@@ -305,7 +313,8 @@ async def badnik(ctx: Context):
 		print(error)
 		return
 	message = " ".join(ctx.content.split(' ')[1:])
-	params = {"username": ctx.author.name, "namecolour": get_name_colour(ctx.author), "message": message}
+	params = {"username": ctx.author.name,
+		"namecolour": get_name_colour(ctx.author), "message": message}
 	write_command("BADNIK", params)
 
 
@@ -316,7 +325,8 @@ async def monitor(ctx: Context):
 		print(error)
 		return
 	message = " ".join(ctx.content.split(' ')[1:])
-	params = {"username": ctx.author.name, "namecolour": get_name_colour(ctx.author), "message": message}
+	params = {"username": ctx.author.name,
+		"namecolour": get_name_colour(ctx.author), "message": message}
 	write_command("MONITOR", params)
 
 
@@ -329,7 +339,8 @@ async def spring(ctx: Context):
 	colours = ['blue', 'yellow', 'red']
 	orientation = ['horizontal', 'vertical', 'diagonal']
 	direction = ['forward', 'back', 'left', 'right']
-	write_command("SPRING", {"colour": random.choice(colours), "orientation": random.choice(orientation),
+	write_command("SPRING", {"colour": random.choice(colours),
+		"orientation": random.choice(orientation),
 		"direction": random.choice(direction)})
 
 
@@ -403,13 +414,15 @@ async def event_message(ctx: Context):
 		ctx.content = ctx.content.replace(character, ' ')
 	await bot.handle_commands(ctx)
 	colour = get_name_colour(ctx.author)
-	if not config['display_chat_messages']:
+	if not config.get('display_chat_messages'):
 		return
-	if ctx.content.startswith(config['command_prefix']) and not config['display_chat_commands']:
+	if ctx.content.startswith(config['command_prefix']) and not config[
+		'display_chat_commands']:
 		return
 	if ctx.author.name == bot.nick and not config['display_bot_messages']:
 		return
-	write_command("CHAT", {"username": ctx.author.name, "message": ctx.content, "namecolour": colour})
+	write_command("CHAT", {"username": ctx.author.name, "message": ctx.content,
+		"namecolour": colour})
 
 
 if __name__ == "__main__":
