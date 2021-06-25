@@ -81,8 +81,7 @@ The configuration file specifies the following options using YAML:
 * `client_id`: A Twitch application client ID.
 * `bot_nick`: The name of the account of your bot (all lowercase).
 * `command_prefix`: The prefix for messages that indicates a command. E.g. if
-  set to "#" the command to change character will be "#char". If it's "!" it
-  will be "!char".
+  set to "#" the command to change character will be "#char". Defaults to "!".
 * `channel`: The name of the channel you will be streaming from.
 * `srb2_dir`: The directory Sonic Robo Blast 2 is installed in.
 * `join_message`: A message to display in chat when the bot starts.
