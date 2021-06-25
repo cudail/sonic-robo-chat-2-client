@@ -419,8 +419,7 @@ async def event_message(ctx: Context):
 	if not config.get('display_chat_messages'):
 		return
 	global command_prefix
-	if ctx.content.startswith(command_prefix) and not config[
-		'display_chat_commands']:
+	if ctx.content.startswith(command_prefix) and not config.get('display_chat_commands'):
 		return
 	if ctx.author.name == bot.nick and not config.get('display_bot_messages'):
 		return
