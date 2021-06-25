@@ -80,10 +80,10 @@ async def event_ready():
 	print("Bot started.")
 	global bot, channel
 	channel = bot.get_channel(config['channel'])
-	if channel and config.get('join_message'):
-		await channel.send(config['join_message'])
-	else:
+	if not channel:
 		print("Not connected to expected channel: " + config['channel'])
+	elif config.get('join_message'):
+		await channel.send(config['join_message'])
 
 
 def write_command(command_name: str, params: Dict[str, str] = None):
