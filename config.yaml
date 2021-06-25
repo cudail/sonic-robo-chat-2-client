@@ -27,3 +27,4 @@ display_bot_messages: yes
 #  bgm: 10
 #bits_per_ring: 1
 #bits_per_unring: 2
+#write_immediately: yes
