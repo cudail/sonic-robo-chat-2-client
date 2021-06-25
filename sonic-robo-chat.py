@@ -422,7 +422,7 @@ async def event_message(ctx: Context):
 	if ctx.content.startswith(command_prefix) and not config[
 		'display_chat_commands']:
 		return
-	if ctx.author.name == bot.nick and not config['display_bot_messages']:
+	if ctx.author.name == bot.nick and not config.get('display_bot_messages'):
 		return
 	write_command("CHAT", {"username": ctx.author.name, "message": ctx.content,
 		"namecolour": colour})
