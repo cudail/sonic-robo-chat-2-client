@@ -6,7 +6,7 @@ import random
 import yaml
 from typing import Dict, Optional
 from twitchio.ext import commands
-from twitchio.dataclasses import User, Context
+from twitchio.dataclasses import User, Context, Message
 
 # Load config
 if len(sys.argv) > 1:
@@ -145,6 +145,14 @@ def parse_float(string: str) -> Optional[float]:
 		return None
 
 
+def bits_used(message: Message) -> int:
+	if message.tags and 'bits_used' in message.tags:
+		bits = parse_int(message.tags['bits_used'])
+		if bits:
+			return bits
+	return 0
+
+
 def handle_command(name: str, context: Context) -> str:
 	print(f"received command {context.content}")
 	global disabled, subscriber_only, mod_only, min_bits
@@ -156,14 +164,9 @@ def handle_command(name: str, context: Context) -> str:
 		return f"Command {name} is mod only, ignoring."
 	if name in min_bits:
 		bits_needed = parse_int(min_bits[name])
-		if bits_needed is not None and bits_needed > 0:
-			if not context.message.tags or 'bits_used' not in context.message.tags:
-				return f"Command {name} needs {bits_needed} bits but message had none."
-			bits_received = parse_int(context.message.tags['bits_used'])
-			if bits_received is None:
-				return f"Command {name} needs {bits_needed} bits but message had none."
-			if bits_received < bits_needed:
-				return f"Command {name} needs {bits_needed} but only {bits_received} were received."
+		bits_received = bits_used(context.message)
+		if bits_needed > bits_received:
+			return f"Command {name} needs {bits_needed} but {bits_received} were received."
 
 
 # Character commands
