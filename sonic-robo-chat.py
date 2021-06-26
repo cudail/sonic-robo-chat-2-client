@@ -156,17 +156,18 @@ def bits_used(message: Message) -> int:
 def handle_command(name: str, context: Context) -> str:
 	print(f"received command {context.content}")
 	global disabled, subscriber_only, mod_only, min_bits
-	if name in disabled:
-		return f"Command {name} is disabled, ignoring."
-	if name in subscriber_only and not context.author.is_subscriber:
-		return f"Command {name} is subscriber only, ignoring"
-	if name in mod_only and not context.author.is_mod:
-		return f"Command {name} is mod only, ignoring."
-	if name in min_bits:
-		bits_needed = parse_int(min_bits[name])
-		bits_received = bits_used(context.message)
-		if bits_needed > bits_received:
-			return f"Command {name} needs {bits_needed} but {bits_received} were received."
+	if not context.author.is_mod:
+		if name in disabled:
+			return f"Command {name} is disabled, ignoring."
+		if name in mod_only:
+			return f"Command {name} is mod only, ignoring."
+		if name in subscriber_only and not context.author.is_subscriber:
+			return f"Command {name} is subscriber only, ignoring"
+		if name in min_bits:
+			bits_needed = parse_int(min_bits[name])
+			bits_received = bits_used(context.message)
+			if bits_needed > bits_received:
+				return f"Command {name} needs {bits_needed} but {bits_received} were received."
 
 
 # Character commands
