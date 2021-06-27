@@ -10,6 +10,7 @@ oauth_token: oauth:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 bot_nick: bot_account_name
 channel: twitch_channel_name
 srb2_dir: "C:\\Users\\%USERNAME%\\SRB2 v2.2"
+join_message: "Connected to chat"
 command_prefix: "!"
 mod_only:
   - killall
