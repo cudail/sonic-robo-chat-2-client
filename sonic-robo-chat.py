@@ -5,6 +5,8 @@ import hashlib
 import random
 import yaml
 from typing import Dict, Optional
+
+from twitchio import Client
 from twitchio.ext import commands
 from twitchio.dataclasses import User, Context, Message
 
@@ -44,7 +46,6 @@ command_prefix = config.get('command_prefix', "!")
 # Initialise bot
 bot = commands.Bot(
 	irc_token=oauth_token,
-	client_id=config['client_id'],
 	nick=config['bot_nick'],
 	prefix=command_prefix,
 	initial_channels=["#" + config['channel']]
