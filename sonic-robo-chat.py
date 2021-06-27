@@ -196,10 +196,10 @@ async def ring(ctx: Context):
 		return
 	bpr = parse_int(config.get('bits_per_ring'))
 	if bpr and bpr > 0:
-		bits_received = parse_int(ctx.message.tags['bits_used'])
-		if bits_received is not None:
+		bits_received = bits_used(ctx.message)
+		if bits_received > 0:
 			m = math.floor(bits_received / bpr)
-			for i in range(1, m):
+			for i in range(0, m):
 				write_command("RING")
 			return
 	write_command("RING")
@@ -213,10 +213,10 @@ async def unring(ctx: Context):
 		return
 	bpu = parse_int(config.get('bits_per_unring'))
 	if bpu and bpu > 0:
-		bits_received = parse_int(ctx.message.tags['bits_used'])
-		if bits_received is not None:
+		bits_received = bits_used(ctx.message)
+		if bits_received > 0:
 			m = math.floor(bits_received / bpu)
-			for i in range(1, m):
+			for i in range(0, m):
 				write_command("UNRING")
 			return
 	write_command("UNRING")
