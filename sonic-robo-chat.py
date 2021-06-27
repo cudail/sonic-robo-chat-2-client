@@ -5,8 +5,6 @@ import hashlib
 import random
 import yaml
 from typing import Dict, Optional
-
-from twitchio import Client
 from twitchio.ext import commands
 from twitchio.dataclasses import User, Context, Message
 
