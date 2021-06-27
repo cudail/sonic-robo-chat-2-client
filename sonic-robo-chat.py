@@ -146,8 +146,8 @@ def parse_float(string: str) -> Optional[float]:
 
 
 def bits_used(message: Message) -> int:
-	if message.tags and 'bits_used' in message.tags:
-		bits = parse_int(message.tags['bits_used'])
+	if message.tags and 'bits' in message.tags:
+		bits = parse_int(message.tags['bits'])
 		if bits:
 			return bits
 	return 0
