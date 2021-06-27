@@ -97,7 +97,9 @@ The configuration file specifies the following options using YAML:
 * `disabled`: A list of commands that are disabled entirely.
 * `min_bits`: A dictionary specifying the amount of bits that each command should
   cost to use. E.g. if `char: 50` is set here then a message must have a cheer
-  of at least 50 bits for the this command to work.
+  of at least 50 bits for the this command to work. The command still has to 
+  be the first thing in the message so cheers should be at the end, not the 
+  start for commands to work.
 * `bits_per_ring`: Allows the `ring` command to be used with a cheer to give 
   more rings at once. E.g. if it's set to 2 and a user cheers with 100 bits then
   50 `ring` commands will be sent to the game. Users can still send ring command
