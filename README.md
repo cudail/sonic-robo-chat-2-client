@@ -12,6 +12,7 @@ First download and setup [Sonic Robo Chat 2] itself.
 Then download the contents of this repository. It does not matter where on your
 computer you save it.
 
+[Sonic Robo Chat 2]: https://github.com/oakreef/sonic-robo-chat-2
 
 ### Twitch API
 
