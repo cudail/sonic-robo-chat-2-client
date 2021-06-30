@@ -194,7 +194,7 @@ async def ring(ctx: Context):
 	if error is not None:
 		print(error)
 		return
-	bpr = parse_int(config.get('bits_per_ring'))
+	bpr = parse_int(config.get('bits_per_ring', 0))
 	if bpr and bpr > 0:
 		bits_received = bits_used(ctx.message)
 		if bits_received > 0:
@@ -211,7 +211,7 @@ async def unring(ctx: Context):
 	if error is not None:
 		print(error)
 		return
-	bpu = parse_int(config.get('bits_per_unring'))
+	bpu = parse_int(config.get('bits_per_unring', 0))
 	if bpu and bpu > 0:
 		bits_received = bits_used(ctx.message)
 		if bits_received > 0:
