@@ -300,10 +300,7 @@ async def obj(ctx: Context):
 	if len(words) < 2:
 		print("Object command did not include an ID, ignoring")
 		return
-	object_id = parse_int(words[1])
-	if not object_id or object_id < 1:
-		print("Object command did not contain a valid ID, ignoring")
-		return
+	object_id = words[1]
 	message = " ".join(words[2:])
 	colour = get_name_colour(ctx.author)
 	params = {"username": ctx.author.name, "namecolour": colour,
@@ -360,11 +357,7 @@ async def sfx(ctx: Context):
 	if len(words) < 2:
 		print("sfx command did not have an argument, ignoring")
 		return
-	sfx_id = parse_int(words[1])
-	if not sfx_id or sfx_id < 1:
-		print("sfx command did not contain a sfx ID, ignoring")
-		return
-	write_command("SOUND", {"sound": str(sfx_id)})
+	write_command("SOUND", {"sound": words[1]})
 
 
 @bot.command()
